@@ -1,0 +1,37 @@
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
+   
+</head>
+<body>
+
+    <button data-search="Arnold Swcharzeneggar">Arnold</button>
+    <button data-search="Ace Ventura">Ace Ventura</button>
+    
+    <div id="GifArea"></div>
+   
+
+    <script type='text/javascript'>
+       $('button').on('click', function(){
+          var x = $(this).data("search");
+          console.log(x);
+          
+          var queryURL = "http://api.giphy.com/v1/gifs/search?q="+x+"&api_key=9A5HnpdsMgov1rKRqjbAXsSLnSUO62Qg&limit=10";
+          console.log(queryURL);
+        
+        $.ajax({url:queryURL,method:'GET'})
+              .done(function(response){
+                  console.log(response);
+                  for(var i=0; i < response.data.length; i++){
+                      $('#GifArea').prepend("<p>Rating: "+response.data[i].rating+"</p>");
+                      $('#GifArea').prepend("<img src='"+response.data[i].images.downsized.url+"'>");    
+                  }
+                  
+        }) 
+    })
+
+    </script>
+
+    
+</body>
+</html>
